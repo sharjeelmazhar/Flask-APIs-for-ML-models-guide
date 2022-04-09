@@ -33,7 +33,25 @@ def predict_body_named():
     """This function get the named args from the body of the api and predicts the label"""
     testtext=request.json
     query_df=pd.DataFrame(testtext)
-    prediction = model.predict(query_df)
+    # pd.to_numeric(query_df)
+    # print(query_df)
+    v1=query_df['Enter your age?'][0]
+    v2=query_df['Gender'][0]
+    v3=query_df['Select your Intermediate Field'][0]
+    v4=query_df['Enter Father/Guardian Income'][0]
+    v5=query_df['1st Preferred Subject'][0]
+    v6=query_df['2nd Preferred Subject'][0]
+    v7=query_df['Select the Field you like the most'][0]
+    v1=int(v1)
+    v2=int(v2)
+    v3=int(v3)
+    v4=int(v4)
+    v5=int(v5)
+    v6=int(v6)
+    v7=int(v7)
+    print(v1,v2,v3,v4,v5,v6,v7)
+    # prediction = model.predict(query_df)
+    prediction = model.predict([[v1,v2,v3,v4,v5,v6,v7]])
     return jsonify({'Prediction ': int(prediction) })
 
 if __name__ == '__main__':
